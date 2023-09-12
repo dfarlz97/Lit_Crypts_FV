@@ -1,7 +1,8 @@
-function getRandomizedSubstitutionMap() {
+const encrypt = (inputString) => {
+  function getRandomizedSubstitutionMap() {
     const alphabet = 'abcdefghijklmnopqrstuvwxyz';
     const shuffledAlphabet = alphabet.split('');
-  
+
     // Function to shuffle the substitution map object using Fisher-Yates algorithm
     function shuffleArray(array) {
       for (let i = array.length - 1; i > 0; i--) {
@@ -10,23 +11,23 @@ function getRandomizedSubstitutionMap() {
       }
       return array;
     }
-  
+
     // Shuffle the substitution map object directly
     shuffleArray(shuffledAlphabet);
-  
+
     // Create the substitution map
     const randomizedSubstitutionMap = {};
     for (let i = 0; i < alphabet.length; i++) {
       randomizedSubstitutionMap[alphabet[i]] = shuffledAlphabet[i];
     }
-  
+
     return randomizedSubstitutionMap;
   }
-  
+
   function substitutionEncrypt(inputString, substitutionMap) {
     // Convert the inputString to lowercase
     const lowercaseInput = inputString.toLowerCase();
-  
+
     // Encrypt the inputString using the substitutionMap
     let encrypted = '';
     for (let i = 0; i < lowercaseInput.length; i++) {
@@ -34,15 +35,17 @@ function getRandomizedSubstitutionMap() {
       const encryptedChar = substitutionMap[currentChar] || currentChar;
       encrypted += encryptedChar;
     }
-  
+
+    console.log(encrypted);
     return encrypted;
   }
-  
+
   // Get a randomized substitution map
   const randomSubstitutionMap = getRandomizedSubstitutionMap();
-  
+
   // Example usage:
-  const inputString = 'hello war';
   const encrypted = substitutionEncrypt(inputString, randomSubstitutionMap);
-  console.log(encrypted);
-  
+  return encrypted; // Return the encrypted string
+};
+
+export default encrypt;
